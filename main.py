@@ -1,5 +1,18 @@
-import requests
+from API_request import get_price
 import telebot
+
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+parameters = {
+    'start': '1',
+    'limit': '5000',
+    'convert': 'USD'
+}
+headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': '3a8fc060-e188-44d8-92b1-874472fe787c',
+}
+
+
 bot = telebot.TeleBot("705393130:AAHkmkZ0D9AhoR9iH8Dl8eu7ZeVTsuPzuew")
 
 
@@ -10,10 +23,8 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['bitcoin'])
 def send_xr(message):
-    bitcoin_api_url = 'https://api.coinmarketcap.com/v1/ticker/bitcoin/'
-    response = requests.get(bitcoin_api_url)
-    response_json = response.json()
-    bot.reply_to(message, '1 BTC = ' + str(round(float(response_json[0]['price_usd']))) + ' USD')
+    response = get_price(url, parameters, headers)
+    bot.reply_to(message, '1 BTC = ' + str(round(float(response))) + ' USD')
 
 
 bot.polling()
