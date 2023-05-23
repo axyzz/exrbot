@@ -9,11 +9,11 @@ parameters = {
 }
 headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': '3a8fc060-e188-44d8-92b1-874472fe787c',
+    'X-CMC_PRO_API_KEY': 'CMC api-key',
 }
 
 
-bot = telebot.TeleBot("705393130:AAHkmkZ0D9AhoR9iH8Dl8eu7ZeVTsuPzuew")
+bot = telebot.TeleBot("telegram API-key")
 
 
 @bot.message_handler(commands=['start', 'help'])
